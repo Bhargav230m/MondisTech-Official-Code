@@ -19,7 +19,7 @@ module.exports = {
     .addSubcommand((subCommand) =>
       subCommand
         .setName("welcome")
-        .setDescription("Enabled Welcome system in your server")
+        .setDescription("Enables Welcome system in your server")
         .addChannelOption((option) =>
           option
             .setName("channel")
@@ -56,4 +56,13 @@ module.exports = {
                 .setRequired(true)
             )
         )
+        .addSubcommand(subCommand => 
+          subCommand.setName("modlogs")
+          .setDescription("Enables modlogs")
+          .addChannelOption((option) =>
+          option.setName("channel")
+          .setDescription("Name of the channel to set modlogs to!")
+          .setRequired(true)
+          )
+          )
 };

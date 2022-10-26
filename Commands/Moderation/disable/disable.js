@@ -22,5 +22,10 @@ module.exports = {
     subCommand
       .setName("leave")
       .setDescription("Disables leave from your server")
-  ),
+  )
+  .addSubcommand((subCommand) =>
+  subCommand
+    .setName("modlogs")
+    .setDescription("Disables modlogs from your server")
+),
 };

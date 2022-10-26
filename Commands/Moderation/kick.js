@@ -7,6 +7,7 @@ const {
   InteractionResponse,
 } = require("discord.js");
 const DataBase = require("../../Schemas/Infractions");
+const ml = require("../../Schemas/ModLogs")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -78,6 +79,8 @@ module.exports = {
       userData.Infractions.push(newInfractionsObject) &&
         (await userData.save());
 
+
+
     const successEmbed = new EmbedBuilder()
       .setAuthor({ name: "Kick Issues", iconURL: guild.iconURL() })
       .setColor("Gold")
@@ -87,7 +90,18 @@ module.exports = {
           `\nBrining their insfractions total to **${userData.Infractions.length} points**`,
         ].join("\n")
       );
-
+      const dat = await ml.findOne({ Guild: guild.id });
+      if(!dat) {
+        return interaction.reply({ embeds: [successEmbed]})
+      }
+      const dchannel = await guild.channels.cache.get(dat.Channel);
+      if(dat) {
+        const embe = new EmbedBuilder()
+        .setAuthor({name: "ModLogs"})
+        .setDescription(`${target} was kicked from server for reason by ${member}`)
+        .setColor("Random")
+        dchannel.send({ embeds: [embe] })
+      }
     return interaction.reply({ embeds: [successEmbed] });
   },
 };

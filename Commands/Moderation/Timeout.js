@@ -8,7 +8,7 @@ const {
 } = require("discord.js");
 const DataBase = require("../../Schemas/Infractions");
 const ms = require("ms");
-
+const ml = require("../../Schemas/ModLogs")
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("timeout")
@@ -107,7 +107,19 @@ module.exports = {
           `\nReason ${reason}`,
         ].join("\n")
       );
-
+      const dat = await ml.findOne({ Guild: guild.id });
+      if(!dat) {
+        return interaction.reply({ embeds: [succesEmbed]})
+      }
+      const dchannel = await guild.channels.cache.get(dat.Channel);
+      
+      if(dat) {
+        const embe = new EmbedBuilder()
+        .setAuthor({name: "ModLogs"})
+        .setDescription(`${target} was given a timeout`)
+        .setColor("Random")
+        dchannel.send({ embeds: [embe] })
+      }
     return interaction.reply({ embeds: [successEmbed] });
   },
 };

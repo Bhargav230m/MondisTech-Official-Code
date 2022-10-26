@@ -3,7 +3,7 @@ const {
     PermissionFlagsBits,
     EmbedBuilder,
   } = require("discord.js");
-  
+  const ml = require("../../Schemas/ModLogs")
   module.exports = {
     data: new SlashCommandBuilder()
       .setName("unlock")
@@ -27,9 +27,23 @@ const {
         AttachFiles: true,
       });
   
-  
+    
+
       await interaction.reply({
         embeds: [succesEmbed],
       })
+      const dat = await ml.findOne({ Guild: guild.id });
+      if(!dat) {
+        return interaction.reply({ embeds: [succesEmbed]})
+      }
+      const dchannel = await guild.channels.cache.get(dat.Channel);
+      
+      if(dat) {
+        const embe = new EmbedBuilder()
+        .setAuthor({name: "ModLogs"})
+        .setDescription(`${channel} was unlocked`)
+        .setColor("Random")
+        dchannel.send({ embeds: [embe] })
+      }
     },
   };
