@@ -1,8 +1,9 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const {GiphyAPI} = require("../../config.json")
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args)); // since require is not supported, we will use this
 //workaround to import node-fetch
+const {GiphyAPI} = require("../../config.json")
+
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -52,7 +53,7 @@ module.exports = {
 
     async function giphyMeme() {
       await fetch(
-        GiphyAPI
+`${GiphyAPI}`
       ).then(async (res) => {
         let meme = await res.json();
 

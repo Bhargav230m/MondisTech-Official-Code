@@ -1,7 +1,6 @@
 {
   "token" : "Your Bot Token",
-  "DataBaseURL" : "Your MongoDB URL",
-  "OwnerID": "OwnerID",
-  "GiphyAPI" : "https://api.giphy.com/v1/gifs/random?api_key=GIPHY API KEY",
-  "BrainShopAPI": ""
+  "DataBaseURL" : "Your MongoDb url",
+  "GiphyAPI": "https://api.giphy.com/v1/gifs/random?api_key=Giphy API key",
+  "BrainShopAPI": "Your BrainShop API key"
 }

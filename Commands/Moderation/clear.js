@@ -49,6 +49,10 @@ const clear = ("clear")
             await channel.bulkDelete(amount, true).then(messages => {
                 res.setDescription(`Succesfully deleted ${messages.size} messages from the channel.`);
                 interaction.reply({embeds: [res]});
+            }).then((m) => {
+                setTimeout(() => {
+                    interaction.deleteReply()
+                }, 2 * 1000)
             });
         }
     }

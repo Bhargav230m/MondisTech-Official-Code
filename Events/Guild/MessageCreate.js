@@ -1,13 +1,9 @@
 const {
-  GuildMember,
-  InteractionCollector,
   Client,
-  EmbedBuilder,
 } = require("discord.js");
-
 const Schema = require("../../Schemas/Chatbot");
 const User = require("../../Schemas/User.js");
-
+const { BrainShopAPI } = require("../../config.json")
 const cooldown = new Set();
 const axios = require("axios");
 module.exports = {
@@ -37,8 +33,7 @@ module.exports = {
           if (!message.guild) return;
           if (message.author.bot) return;
           const res = await axios.get(
-            `
-            http://api.brainshop.ai/get?bid=170102&key=eSh1QCThZ8qIugQA&uid=1&msg=${encodeURIComponent(message.content)}`
+            `${BrainShopAPI}1&msg=${encodeURIComponent(message.content)}`
           );
           await chatbot.send({
             content: `<@${message.author.id}> ${res.data.cnt}`,
