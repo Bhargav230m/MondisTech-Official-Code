@@ -4,13 +4,12 @@ const {
   Partials,
   Collection,
 } = require("discord.js");
-const { Player } = require("discord-player")
-const { Guilds, GuildMembers, GuildMessages, MessageContent, GuildVoiceStates } = GatewayIntentBits;
+const { Guilds, GuildMembers, GuildMessages, MessageContent} = GatewayIntentBits;
 const { User, Message, GuildMember, ThreadMember } = Partials;
 const chalk = require("chalk")
 
 const client = new Client({
-  intents: [Guilds, GuildMembers, GuildMessages, MessageContent, GuildVoiceStates],
+  intents: [Guilds, GuildMembers, GuildMessages, MessageContent],
   partials: [User, Message, GuildMember, ThreadMember],
 });
 const { loadEvents } = require("./Handlers/eventHandler");
@@ -26,13 +25,7 @@ connect(client.config.DataBaseURL, {}).then(() => {
   console.log(chalk.grey("Connected to the database"));
 });
 
-// Add the player on the client
-client.player = new Player(client, {
-  ytdlOptions: {
-      quality: "highestaudio",
-      highWaterMark: 1 << 25
-  }
-})
+
 
 ////Code will apply after the bot gets verified on topgg
 //const { Api } = require("@top-gg/sdk")
